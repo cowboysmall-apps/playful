@@ -1,2 +1,2 @@
 # playful
-A simple and lightweight game engine
+A simple and lightweight game engine.
