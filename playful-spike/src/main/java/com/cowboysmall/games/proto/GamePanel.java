@@ -2,7 +2,6 @@ package com.cowboysmall.games.proto;
 
 import com.cowboysmall.playful.graphics.Mesh;
 import com.cowboysmall.playful.graphics.Triangle;
-import com.cowboysmall.playful.math.Matrix4D;
 import com.cowboysmall.playful.math.Vector4D;
 import com.cowboysmall.playful.math.projection.Projection;
 import com.cowboysmall.playful.math.rotation.RotationX;
@@ -44,8 +43,8 @@ public class GamePanel extends JPanel {
         setBackground(Color.BLACK);
         setForeground(Color.WHITE);
 
-
         updated = new Mesh();
+
         bufferedImage = new BufferedImage(1600, 1200, BufferedImage.TYPE_INT_RGB);
         g2d = bufferedImage.createGraphics();
 
@@ -64,34 +63,26 @@ public class GamePanel extends JPanel {
 
         theta += delta * 0.025;
 
-        RotationX rotationX = new RotationX(theta * 0.33d);
-        RotationY rotationY = new RotationY(theta * 0.66d);
-        RotationZ rotationZ = new RotationZ(theta);
-
-        Translation translationZ = new Translation(0.0d, 0.0d, 10.0d);
-        Translation translationXY = new Translation(1.0d, 1.0d, 0.0d);
-
-        Scale scale = new Scale(800.0d, 600.0d, 1.0d);
-
-        Matrix4D transform =
-                rotationX.preMultiply(rotationY)
-                        .preMultiply(rotationZ)
-                        .preMultiply(translationZ)
-                        .preMultiply(projection)
-                        .preMultiply(translationXY)
-                        .preMultiply(scale);
-
-        updated = asset.transform(transform);
-
-        g2d.clearRect(0, 0, 1600, 1200);
-        for (Triangle triangle : updated.getTriangles())
-            drawTriangle(g2d, triangle.getA(), triangle.getB(), triangle.getC());
+        updated =
+                asset.transform(
+                        new RotationX(theta * 0.33d)
+                                .preMultiply(new RotationY(theta * 0.66d))
+                                .preMultiply(new RotationZ(theta))
+                                .preMultiply(new Translation(0.0d, 0.0d, 10.0d))
+                                .preMultiply(projection)
+                                .preMultiply(new Translation(1.0d, 1.0d, 0.0d))
+                                .preMultiply(new Scale(800.0d, 600.0d, 1.0d))
+                );
     }
 
     @Override
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
+
+        g2d.clearRect(0, 0, 1600, 1200);
+        for (Triangle triangle : updated.getTriangles())
+            drawTriangle(g2d, triangle.getA(), triangle.getB(), triangle.getC());
 
         g.drawImage(bufferedImage, 0, 0, null);
     }

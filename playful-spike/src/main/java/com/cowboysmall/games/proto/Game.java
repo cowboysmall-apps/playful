@@ -13,7 +13,7 @@ public class Game {
     public static void main(String... args) {
 
         Mesh mesh = new AssetLoaderImpl()
-                .loadAsset("/playful/playful-spike/src/main/resources/teapot2.obj");
+                .loadAsset("/playful/playful-spike/src/main/resources/teapot1.obj");
         Projection projection = new Projection(1.3333d, 60d, 0.1d, 1000d);
 
         GamePanel gamePanel = new GamePanel(projection, mesh);
