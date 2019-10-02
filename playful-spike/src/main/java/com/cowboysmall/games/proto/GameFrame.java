@@ -4,12 +4,27 @@ import javax.swing.JFrame;
 
 public class GameFrame extends JFrame {
 
+    private GamePanel gamePanel;
+
     public GameFrame(String title, GamePanel gamePanel) {
 
-        setTitle(title);
+        super(title);
+        this.gamePanel = gamePanel;
+    }
+
+
+    //_________________________________________________________________________
+
+    public void init() {
+
         add(gamePanel);
+        addKeyListener(gamePanel);
+
         setSize(1600, 1200);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setVisible(true);
+        gamePanel.init();
     }
 }

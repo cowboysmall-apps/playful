@@ -12,6 +12,7 @@ public class Projection extends Matrix4D {
         super();
 
         double zoom = 1.0d / tan(toRadians(fieldOfView / 2.0d));
+
         setValue(0, 0, zoom);
         setValue(1, 1, aspectRatio * zoom);
         setValue(2, 2, (far + near) / (far - near));

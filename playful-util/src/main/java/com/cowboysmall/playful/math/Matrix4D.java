@@ -157,6 +157,18 @@ public class Matrix4D {
 
     //_________________________________________________________________________
 
+    public static Matrix4D identity() {
+
+        return new Matrix4D(
+                1, 0, 0, 0,
+                0, 1, 0, 0,
+                0, 0, 1, 0,
+                0, 0, 0, 1
+        );
+    }
+
+    //_________________________________________________________________________
+
     @Override
     public boolean equals(Object other) {
 
