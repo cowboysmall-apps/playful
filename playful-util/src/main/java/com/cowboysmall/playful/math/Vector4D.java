@@ -1,26 +1,16 @@
 package com.cowboysmall.playful.math;
 
-import static java.lang.Double.compare;
+import java.util.Arrays;
+
+import static java.lang.Math.sqrt;
 import static java.lang.String.format;
-import static java.util.Objects.hash;
 
 public class Vector4D {
 
-    private final double x;
-    private final double y;
-    private final double z;
-    private final double w;
+    private final double[] values;
 
 
     //_________________________________________________________________________
-
-    public Vector4D(double x, double y, double z, double w) {
-
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.w = w;
-    }
 
     public Vector4D(double x, double y, double z) {
 
@@ -32,10 +22,7 @@ public class Vector4D {
         if (values.length != 4)
             throw new DimensionException(format("4 != %d", values.length));
 
-        this.x = values[0];
-        this.y = values[1];
-        this.z = values[2];
-        this.w = values[3];
+        this.values = values;
     }
 
     public Vector4D() {
@@ -46,19 +33,19 @@ public class Vector4D {
     //_________________________________________________________________________
 
     public double getX() {
-        return x;
+        return values[0];
     }
 
     public double getY() {
-        return y;
+        return values[1];
     }
 
     public double getZ() {
-        return z;
+        return values[2];
     }
 
     public double getW() {
-        return w;
+        return values[3];
     }
 
 
@@ -66,7 +53,7 @@ public class Vector4D {
 
     public double[] getValues() {
 
-        return new double[]{x, y, z, w};
+        return values;
     }
 
 
@@ -74,12 +61,12 @@ public class Vector4D {
 
     public Vector4D add(Vector4D other) {
 
-        return new Vector4D(x + other.x, y + other.y, z + other.z);
+        return new Vector4D(values[0] + other.values[0], values[1] + other.values[1], values[2] + other.values[2]);
     }
 
     public Vector4D subtract(Vector4D other) {
 
-        return new Vector4D(x - other.x, y - other.y, z - other.z);
+        return new Vector4D(values[0] - other.values[0], values[1] - other.values[1], values[2] - other.values[2]);
     }
 
 
@@ -96,22 +83,22 @@ public class Vector4D {
 
     public Vector4D translate(double dX, double dY, double dZ) {
 
-        return new Vector4D(x + dX, y + dY, z + dZ);
+        return new Vector4D(values[0] + dX, values[1] + dY, values[2] + dZ);
     }
 
     public Vector4D translateX(double dX) {
 
-        return new Vector4D(x + dX, y, z);
+        return new Vector4D(values[0] + dX, values[1], values[2]);
     }
 
     public Vector4D translateY(double dY) {
 
-        return new Vector4D(x, y + dY, z);
+        return new Vector4D(values[0], values[1] + dY, values[2]);
     }
 
     public Vector4D translateZ(double dZ) {
 
-        return new Vector4D(x, y, z + dZ);
+        return new Vector4D(values[0], values[1], values[2] + dZ);
     }
 
 
@@ -119,27 +106,27 @@ public class Vector4D {
 
     public Vector4D scale(double factorX, double factorY, double factorZ) {
 
-        return new Vector4D(factorX * x, factorY * y, factorZ * z);
+        return new Vector4D(factorX * values[0], factorY * values[1], factorZ * values[2]);
     }
 
     public Vector4D scale(double factor) {
 
-        return new Vector4D(factor * x, factor * y, factor * z);
+        return new Vector4D(factor * values[0], factor * values[1], factor * values[2]);
     }
 
     public Vector4D scaleX(double factor) {
 
-        return new Vector4D(factor * x, y, z);
+        return new Vector4D(factor * values[0], values[1], values[2]);
     }
 
     public Vector4D scaleY(double factor) {
 
-        return new Vector4D(x, factor * y, z);
+        return new Vector4D(values[0], factor * values[1], values[2]);
     }
 
     public Vector4D scaleZ(double factor) {
 
-        return new Vector4D(x, y, factor * z);
+        return new Vector4D(values[0], values[1], factor * values[2]);
     }
 
 
@@ -147,16 +134,29 @@ public class Vector4D {
 
     public double dotProduct(Vector4D other) {
 
-        return (x * other.x) + (y * other.y) + (z * other.z);
+        return (values[0] * other.values[0]) + (values[1] * other.values[1]) + (values[2] * other.values[2]);
     }
 
     public Vector4D crossProduct(Vector4D other) {
 
         return new Vector4D(
-                (y * other.z) - (z * other.y),
-                (z * other.x) - (x * other.z),
-                (x * other.y) - (y * other.x)
+                (values[1] * other.values[2]) - (values[2] * other.values[1]),
+                (values[2] * other.values[0]) - (values[0] * other.values[2]),
+                (values[0] * other.values[1]) - (values[1] * other.values[0])
         );
+    }
+
+
+    //_________________________________________________________________________
+
+    public double length() {
+
+        return sqrt(dotProduct(this));
+    }
+
+    public Vector4D normalise() {
+
+        return scale(1.0d / length());
     }
 
 
@@ -170,10 +170,7 @@ public class Vector4D {
         if (other instanceof Vector4D) {
 
             Vector4D vector4D = (Vector4D) other;
-            return compare(x, vector4D.x) == 0 &&
-                    compare(y, vector4D.y) == 0 &&
-                    compare(z, vector4D.z) == 0 &&
-                    compare(w, vector4D.w) == 0;
+            return Arrays.equals(values, vector4D.values);
         }
 
         return false;
@@ -182,6 +179,6 @@ public class Vector4D {
     @Override
     public int hashCode() {
 
-        return hash(x, y, z, w);
+        return Arrays.hashCode(values);
     }
 }

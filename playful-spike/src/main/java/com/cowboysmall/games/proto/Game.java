@@ -10,7 +10,7 @@ public class Game {
 
         Mesh mesh =
                 new AssetLoaderImpl()
-                        .loadAsset("/playful/playful-spike/src/main/resources/cube1.obj");
+                        .loadAsset("/playful/playful-spike/src/main/resources/teapot1.obj");
 
         GamePanel gamePanel = new GamePanel(mesh);
 
