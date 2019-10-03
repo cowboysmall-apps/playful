@@ -4,7 +4,7 @@ public class Breakout {
 
     public static void main(String... args) {
 
-        BreakoutFrame breakoutFrame = new BreakoutFrame("", new BreakoutPanel());
+        BreakoutFrame breakoutFrame = new BreakoutFrame("Breakout", new BreakoutPanel());
         breakoutFrame.setVisible(true);
     }
 }
