@@ -52,6 +52,13 @@ public class GameCanvas extends BufferedImage {
                         .collect(Collectors.toList());
     }
 
+    public void transformAll(Matrix4D... matrix4D) {
+
+        transformed = new ArrayList<>();
+        transformed.add(children.get(0).transform(matrix4D[0]));
+        transformed.add(children.get(1).transform(matrix4D[1]));
+    }
+
     public void draw() {
 
         graphics2D.clearRect(0, 0, getWidth(), getHeight());

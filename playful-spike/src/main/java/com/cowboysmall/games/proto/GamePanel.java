@@ -14,11 +14,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.stream.Stream;
 
 public class GamePanel extends JPanel implements KeyListener {
 
     private GameCanvas gameCanvas;
-    private Mesh asset;
+    private Mesh[] assets;
 
     private Vector4D position;
 
@@ -30,10 +31,10 @@ public class GamePanel extends JPanel implements KeyListener {
 
     //_________________________________________________________________________
 
-    public GamePanel(Mesh asset) {
+    public GamePanel(Mesh... assets) {
 
         super();
-        this.asset = asset;
+        this.assets = assets;
 
         setBackground(Color.BLACK);
         setForeground(Color.WHITE);
@@ -45,7 +46,8 @@ public class GamePanel extends JPanel implements KeyListener {
     public void init() {
 
         gameCanvas = new GameCanvas(getWidth(), getHeight());
-        gameCanvas.add(asset);
+        Stream.of(assets)
+                .forEach(gameCanvas::add);
 
         position = new Vector4D();
     }
@@ -54,15 +56,40 @@ public class GamePanel extends JPanel implements KeyListener {
 
         theta += delta * 0.0125;
 
-        Matrix4D matrix4D =
+//        Matrix4D matrix4D =
+//                new Rotation(theta, theta * 0.33d, theta * 0.66d)
+//                        .preMultiply(new Translation(0.0d, 0.0d, 10.0d))
+//                        .preMultiply(new View(pitch, yaw, position))
+//                        .preMultiply(new Projection(1.3333d, 90d, 0.1d, 1000d))
+//                        .preMultiply(new Translation(1.0d, 1.0d, 0.0d))
+//                        .preMultiply(new Scale(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));
+//
+//        gameCanvas.transform(matrix4D);
+
+        Matrix4D view = new View(pitch, yaw, position);
+
+        Matrix4D world1 =
                 new Rotation(theta, theta * 0.33d, theta * 0.66d)
-                        .preMultiply(new Translation(0.0d, 0.0d, 10.0d))
-                        .preMultiply(new View(pitch, yaw, position))
-                        .preMultiply(new Projection(1.3333d, 90d, 0.1d, 1000d))
+                        .preMultiply(new Translation(0.0d, 0.0d, 10.0d));
+
+        Matrix4D world2 = new Translation(0.0d, 0.0d, 15.0d);
+
+
+        Matrix4D screen1 =
+                new Projection(1.3333d, 90d, 0.1d, 1000d)
                         .preMultiply(new Translation(1.0d, 1.0d, 0.0d))
                         .preMultiply(new Scale(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));
 
-        gameCanvas.transform(matrix4D);
+        Matrix4D screen2 =
+                new Projection(1.3333d, 90d, 0.1d, 1000d)
+                        .preMultiply(new Translation(0.5d, 0.5d, 0.0d))
+                        .preMultiply(new Scale(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));
+
+
+        gameCanvas.transformAll(
+                world1.preMultiply(view).preMultiply(screen1),
+                world2.preMultiply(view).preMultiply(screen2)
+        );
     }
 
     @Override
@@ -101,7 +128,6 @@ public class GamePanel extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_S)
             if (-90 < pitch)
                 pitch -= 0.5;
-
     }
 
     @Override

@@ -45,5 +45,10 @@ public class View extends Matrix4D {
         setValue(3, 1, -y.dotProduct(position));
         setValue(3, 2, -z.dotProduct(position));
         setValue(3, 3, 1);
+
+//        setValue(0, 3, -x.dotProduct(position));
+//        setValue(1, 3, -y.dotProduct(position));
+//        setValue(2, 3, -z.dotProduct(position));
+//        setValue(3, 3, 1);
     }
 }

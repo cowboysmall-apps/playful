@@ -22,21 +22,26 @@ public class ObjectFileLoader {
         String filePath = System.getProperty("user.dir") + fileName;
 
         try (Stream<String> stream = Files.lines(Paths.get(filePath))) {
-//        try (Stream<String> stream = Files.lines(Paths.get(Thread.currentThread().getContextClassLoader().getResource(fileName).toURI()))) {
 
-            List<Vector4D> v = stream
-                    .map(line -> line.split(" "))
-                    .filter(array -> array[0].equals("v"))
-                    .map(array -> new Vector4D(parseDouble(array[1]), parseDouble(array[2]), parseDouble(array[3])))
-                    .collect(Collectors.toList());
+            List<Vector4D> v =
+                    stream.map(line -> line.split(" "))
+                            .filter(array -> array[0].equals("v"))
+                            .map(array -> new Vector4D(parseDouble(array[1]), parseDouble(array[2]), parseDouble(array[3])))
+                            .collect(Collectors.toList());
 
             try (Stream<String> stream2 = Files.lines(Paths.get(filePath))) {
 
-                List<Triangle> f = stream2
-                        .map(line -> line.split(" "))
-                        .filter(array -> array[0].equals("f"))
-                        .map(array -> new Triangle(v.get(parseInt(array[1]) - 1), v.get(parseInt(array[2]) - 1), v.get(parseInt(array[3]) - 1)))
-                        .collect(Collectors.toList());
+                List<Triangle> f =
+                        stream2.map(line -> line.split(" "))
+                                .filter(array -> array[0].equals("f"))
+                                .map(array ->
+                                        new Triangle(
+                                                v.get(parseInt(array[1].split("/")[0]) - 1),
+                                                v.get(parseInt(array[2].split("/")[0]) - 1),
+                                                v.get(parseInt(array[3].split("/")[0]) - 1)
+                                        )
+                                )
+                                .collect(Collectors.toList());
 
                 return new Mesh(f);
 
