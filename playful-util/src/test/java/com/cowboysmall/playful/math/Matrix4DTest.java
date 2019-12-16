@@ -1,7 +1,5 @@
 package com.cowboysmall.playful.math;
 
-import com.cowboysmall.playful.math.Matrix4D;
-import com.cowboysmall.playful.math.Vector4D;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
