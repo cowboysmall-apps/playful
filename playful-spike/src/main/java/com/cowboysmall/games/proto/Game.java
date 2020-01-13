@@ -10,10 +10,10 @@ public class Game {
 
         Mesh mesh1 =
                 new AssetLoaderImpl()
-                        .loadAsset("/playful/playful-spike/src/main/resources/cube1.obj");
+                        .loadAsset("/playful-spike/src/main/resources/cube1.obj");
         Mesh mesh2 =
                 new AssetLoaderImpl()
-                        .loadAsset("/playful/playful-spike/src/main/resources/teapot2.obj");
+                        .loadAsset("/playful-spike/src/main/resources/teapot2.obj");
 
         GamePanel gamePanel = new GamePanel(mesh1, mesh2);
 

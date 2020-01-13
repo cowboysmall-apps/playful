@@ -50,11 +50,11 @@ public class GameLoop implements Runnable {
 
             gamePanel.update(1.0d);
             gamePanel.repaint();
+            actualFPS++;
 
             pause(startTime);
 
-            actualFPS++;
-            if (ticksFrom(marker) >= 1000000000) {
+            if (ticksFrom(marker) > 1000000000) {
 
                 System.out.printf(">>> fps: %d%n", actualFPS);
                 actualFPS = 0;
@@ -70,8 +70,9 @@ public class GameLoop implements Runnable {
 
         try {
 
-            if (optimalTime - ticksFrom(time) > 0)
-                sleep((optimalTime - ticksFrom(time)) / 1000000);
+            long delta = optimalTime - ticksFrom(time);
+            if (delta > 0)
+                sleep((delta) / 1000000);
 
         } catch (Exception e) {
 
