@@ -17,7 +17,7 @@ public class Paddle extends Component implements Drawable, Movable, Updateable, 
 
     public Paddle() {
 
-        super(745, 1070);
+        super(395, 470);
     }
 
 
@@ -44,8 +44,8 @@ public class Paddle extends Component implements Drawable, Movable, Updateable, 
 
         if (x < 0)
             x = 0;
-        if (x > 1490)
-            x = 1490;
+        if (x > 690)
+            x = 690;
     }
 
     @Override

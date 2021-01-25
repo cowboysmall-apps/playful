@@ -36,7 +36,7 @@ public class BreakoutPanel extends JPanel implements KeyListener, MouseListener,
         ball = new Ball();
         wall = new Wall();
 
-        canvas = new Canvas(1590, 1170);
+        canvas = new Canvas(790, 570);
         canvas.add(paddle);
         canvas.add(ball);
         canvas.add(wall);

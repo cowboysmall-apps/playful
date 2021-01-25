@@ -17,7 +17,7 @@ public class Ball extends Component implements Drawable, Movable, Updateable {
 
     public Ball() {
 
-        super(800, 600);
+        super(400, 300);
     }
 
 
@@ -57,10 +57,10 @@ public class Ball extends Component implements Drawable, Movable, Updateable {
     @Override
     public void update(int value) {
 
-        if (x < 0 || x > 1570)
+        if (x < 0 || x > 770)
             reverseX();
 
-        if (y < 0 || y > 1140)
+        if (y < 0 || y > 540)
             reverseY();
     }
 }

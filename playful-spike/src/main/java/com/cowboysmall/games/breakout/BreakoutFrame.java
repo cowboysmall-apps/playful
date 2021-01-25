@@ -14,7 +14,7 @@ public class BreakoutFrame extends JFrame {
         addKeyListener(breakoutPanel);
         addMouseListener(breakoutPanel);
 
-        setSize(1600, 1200);
+        setSize(800, 600);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

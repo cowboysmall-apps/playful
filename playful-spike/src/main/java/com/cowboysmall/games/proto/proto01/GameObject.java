@@ -1,4 +1,4 @@
-package com.cowboysmall.games.proto;
+package com.cowboysmall.games.proto.proto01;
 
 import com.cowboysmall.playful.graphics.Mesh;
 import com.cowboysmall.playful.math.Matrix4D;

@@ -1,4 +1,4 @@
-package com.cowboysmall.games.proto;
+package com.cowboysmall.games.proto.proto01;
 
 import javax.swing.JFrame;
 
