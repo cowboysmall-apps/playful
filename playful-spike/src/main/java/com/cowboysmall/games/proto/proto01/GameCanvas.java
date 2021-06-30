@@ -29,8 +29,8 @@ public class GameCanvas extends BufferedImage {
         super(width, height, BufferedImage.TYPE_INT_RGB);
 
         graphics2D = createGraphics();
-        graphics2D.setBackground(Color.WHITE);
-        graphics2D.setColor(Color.BLACK);
+        graphics2D.setBackground(Color.BLACK);
+        graphics2D.setColor(Color.WHITE);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics2D.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
@@ -53,13 +53,6 @@ public class GameCanvas extends BufferedImage {
                 children.stream()
                         .map(mesh -> mesh.transform(matrix4D))
                         .collect(Collectors.toList());
-    }
-
-    public void transformAll(Matrix4D... matrix4D) {
-
-        transformed = new ArrayList<>();
-        transformed.add(children.get(0).transform(matrix4D[0]));
-//        transformed.add(children.get(1).transform(matrix4D[1]));
     }
 
     public void draw() {

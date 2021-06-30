@@ -7,16 +7,11 @@ public class Game {
 
     public static void main(String... args) {
 
-//        Mesh mesh1 =
-//                new AssetLoaderImpl()
-//                        .loadAsset("/playful-spike/src/main/resources/objects/cube1.obj");
-        Mesh mesh2 =
+        Mesh mesh1 =
                 new AssetLoaderImpl()
-                        .loadAsset("/playful-spike/src/main/resources/objects/teapot2.obj");
+                        .loadAsset("/playful-spike/src/main/resources/objects/cube2.obj");
 
-//        GamePanel gamePanel = new GamePanel(mesh1, mesh2);
-
-        GamePanel gamePanel = new GamePanel(mesh2);
+        GamePanel gamePanel = new GamePanel(mesh1);
 
         GameFrame gameFrame = new GameFrame("3D Software Render Demo", gamePanel);
         gameFrame.init();
