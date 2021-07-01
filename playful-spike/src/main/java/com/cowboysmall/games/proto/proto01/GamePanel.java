@@ -9,16 +9,18 @@ import com.cowboysmall.playful.math.scale.Scale;
 import com.cowboysmall.playful.math.translation.Translation;
 import com.cowboysmall.playful.math.view.View;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.stream.Stream;
 
 public class GamePanel extends JPanel implements KeyListener {
 
+    private final Mesh[] assets;
+
     private GameCanvas gameCanvas;
-    private Mesh[] assets;
 
     private Vector4D position;
 
@@ -50,14 +52,14 @@ public class GamePanel extends JPanel implements KeyListener {
         position = new Vector4D();
     }
 
-    public void update(double delta) {
+    public void update(long delta) {
 
-        theta += delta * 0.0125;
+        theta += delta * 0.025;
 
         Matrix4D matrix4D =
                 new View(pitch, yaw, position)
                         .preMultiply(new Rotation(theta, theta * 0.33d, theta * 0.66d))
-                        .preMultiply(new Translation(0.0d, 0.0d, 10.0d))
+                        .preMultiply(new Translation(0.0d, 0.0d, 5.0d))
                         .preMultiply(new Projection(1.3333d, 60d, 0.1d, 1000d))
                         .preMultiply(new Translation(1.0d, 1.0d, 0.0d))
                         .preMultiply(new Scale(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));

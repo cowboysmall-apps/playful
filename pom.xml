@@ -16,15 +16,6 @@
     <url>https://github.com/cowboysmall-apps/playful</url>
 
 
-    <distributionManagement>
-        <repository>
-            <id>bintray-cowboysmall-playful</id>
-            <name>cowboysmall-playful</name>
-            <url>https://api.bintray.com/maven/cowboysmall/maven/com.cowboysmall.playful/;publish=1</url>
-        </repository>
-    </distributionManagement>
-
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
@@ -47,44 +38,14 @@
     </build>
 
 
-    <repositories>
-
-        <repository>
-            <id>jcenter</id>
-            <name>jcenter</name>
-            <url>http://jcenter.bintray.com</url>
-        </repository>
-
-    </repositories>
-
-
-    <pluginRepositories>
-
-        <pluginRepository>
-            <id>jcenter</id>
-            <name>jcenter</name>
-            <url>http://jcenter.bintray.com</url>
-        </pluginRepository>
-
-    </pluginRepositories>
-
-
     <dependencies>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
-            <scope>test</scope>
-        </dependency>
-        <!--
-        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.5.0</version>
+            <version>5.7.2</version>
             <scope>test</scope>
         </dependency>
-        -->
 
         <dependency>
             <groupId>org.hamcrest</groupId>

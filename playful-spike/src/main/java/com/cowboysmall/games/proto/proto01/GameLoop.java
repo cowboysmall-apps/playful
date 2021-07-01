@@ -5,9 +5,8 @@ import static java.lang.Thread.sleep;
 
 public class GameLoop implements Runnable {
 
-    private GamePanel gamePanel;
-
-    private long optimalTime;
+    private final GamePanel gamePanel;
+    private final long frameTime;
 
     private boolean running;
 
@@ -17,7 +16,7 @@ public class GameLoop implements Runnable {
     public GameLoop(GamePanel gamePanel, long fps) {
 
         this.gamePanel = gamePanel;
-        this.optimalTime = 1000000000 / fps;
+        this.frameTime = 1000000000 / fps;
     }
 
 
@@ -25,6 +24,7 @@ public class GameLoop implements Runnable {
 
     public void start() {
 
+        running = true;
         new Thread(this).start();
     }
 
@@ -33,33 +33,34 @@ public class GameLoop implements Runnable {
         running = false;
     }
 
+    public boolean isRunning() {
+
+        return running;
+    }
+
 
     //_________________________________________________________________________
 
     @Override
     public void run() {
 
-        long actualFPS = 0;
-        long marker = nanoTime();
+        long start = nanoTime();
+        long lag = 0;
 
-        running = true;
+        while (isRunning()) {
 
-        while (running) {
+            long current = nanoTime();
+            lag += current - start;
+            start = current;
 
-            long startTime = nanoTime();
+            while (lag >= frameTime) {
 
-            gamePanel.update(1.0d);
-            gamePanel.repaint();
-            actualFPS++;
-
-            pause(startTime);
-
-            if (ticksFrom(marker) > 1000000000) {
-
-                System.out.printf(">>> fps: %d%n", actualFPS);
-                actualFPS = 0;
-                marker = nanoTime();
+                gamePanel.update(lag / frameTime);
+                lag -= frameTime;
             }
+
+            gamePanel.repaint();
+            pause(current);
         }
     }
 
@@ -70,17 +71,17 @@ public class GameLoop implements Runnable {
 
         try {
 
-            long delta = optimalTime - ticksFrom(time);
+            long delta = frameTime - nanoTimeFromNow(time);
             if (delta > 0)
-                sleep((delta) / 1000000);
+                sleep(delta / 1000000);
 
         } catch (Exception e) {
 
-            //
+            throw new GameException(e);
         }
     }
 
-    private long ticksFrom(long time) {
+    private long nanoTimeFromNow(long time) {
 
         return nanoTime() - time;
     }
