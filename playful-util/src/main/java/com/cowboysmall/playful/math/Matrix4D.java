@@ -84,6 +84,25 @@ public class Matrix4D {
         );
     }
 
+    public Matrix4D multiply(double scalar) {
+
+        return new Matrix4D(
+                Arrays.stream(values)
+                        .map(value -> value * scalar)
+                        .toArray()
+        );
+    }
+
+    public Matrix4D add(Matrix4D other) {
+
+        return new Matrix4D(
+                values[0] + other.values[0], values[1] + other.values[1], values[2] + other.values[2], values[3] + other.values[3],
+                values[4] + other.values[4], values[5] + other.values[5], values[6] + other.values[6], values[7] + other.values[7],
+                values[8] + other.values[8], values[9] + other.values[9], values[10] + other.values[10], values[11] + other.values[11],
+                values[12] + other.values[12], values[13] + other.values[13], values[14] + other.values[14], values[15] + other.values[15]
+        );
+    }
+
 
     //_________________________________________________________________________
 

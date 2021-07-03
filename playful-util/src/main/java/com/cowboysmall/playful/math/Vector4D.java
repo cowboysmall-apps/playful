@@ -146,6 +146,16 @@ public class Vector4D {
         );
     }
 
+    public Matrix4D outerProduct(Vector4D other) {
+
+        return new Matrix4D(
+                values[0] * other.values[0], values[0] * other.values[1], values[0] * other.values[2], 0,
+                values[1] * other.values[0], values[1] * other.values[1], values[1] * other.values[2], 0,
+                values[2] * other.values[0], values[2] * other.values[1], values[2] * other.values[2], 0,
+                0, 0, 0, 1
+        );
+    }
+
 
     //_________________________________________________________________________
 
