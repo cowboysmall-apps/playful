@@ -3,10 +3,7 @@ package com.cowboysmall.playful.graphics;
 import com.cowboysmall.playful.math.Matrix4D;
 import com.cowboysmall.playful.math.Vector4D;
 
-import java.util.stream.Stream;
-
 import static java.util.Objects.hash;
-import static java.util.stream.Stream.of;
 
 public class Triangle {
 
@@ -49,6 +46,17 @@ public class Triangle {
                 b.multiply(transformation),
                 c.multiply(transformation)
         );
+    }
+
+
+    //_________________________________________________________________________
+
+    public boolean isNegativeNormal() {
+
+        Vector4D first = b.subtract(a);
+        Vector4D second = c.subtract(a);
+
+        return first.crossProduct(second).getZ() < 0;
     }
 
 

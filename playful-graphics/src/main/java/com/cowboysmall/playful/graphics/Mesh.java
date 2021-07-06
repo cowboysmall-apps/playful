@@ -46,6 +46,16 @@ public class Mesh {
         );
     }
 
+//    public Mesh project(Matrix4D projection) {
+//
+//        return new Mesh(
+//                triangles.stream()
+//                        .filter(Triangle::isNegativeNormal)
+//                        .map(triangle -> triangle.transform(projection))
+//                        .collect(Collectors.toList())
+//        );
+//    }
+
 
     //_________________________________________________________________________
 

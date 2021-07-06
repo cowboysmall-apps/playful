@@ -36,6 +36,7 @@
                 </executions>
             </plugin>
 
+            <!--
             <plugin>
                 <groupId>com.zenjava</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -44,6 +45,7 @@
                     <mainClass>com.cowboysmall.playful.proto.tutorial.Rotation3D</mainClass>
                 </configuration>
             </plugin>
+            -->
         </plugins>
 
     </build>

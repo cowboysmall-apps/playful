@@ -18,5 +18,11 @@ public class Projection extends Matrix4D {
         setValue(2, 2, (far + near) / (far - near));
         setValue(2, 3, 1);
         setValue(3, 2, -(2 * far * near) / (far - near));
+
+//        setValue(0, 0, zoom);
+//        setValue(1, 1, aspectRatio * zoom);
+//        setValue(2, 2, far / (far - near));
+//        setValue(2, 3, 1);
+//        setValue(3, 2, -(far * near) / (far - near));
     }
 }
