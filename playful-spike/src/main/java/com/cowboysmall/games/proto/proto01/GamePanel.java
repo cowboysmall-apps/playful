@@ -8,6 +8,7 @@ import com.cowboysmall.playful.math.projection.Projection;
 import com.cowboysmall.playful.math.rotation.Rotation;
 import com.cowboysmall.playful.math.scale.Scale;
 import com.cowboysmall.playful.math.translation.Translation;
+import com.cowboysmall.playful.math.view.View;
 
 import javax.swing.JPanel;
 import java.awt.Color;
@@ -67,7 +68,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
         Matrix4D matrix4D =
                 new LookAt(eye, up)
-//                        .preMultiply(new View(pitch, yaw, position))
+                        .preMultiply(new View(pitch, yaw, position))
 //                        .preMultiply(new Rotation(theta, theta * 0.33d, theta * 0.66d))
                         .preMultiply(new Translation(0.0d, 0.0d, 2.0d))
                         .preMultiply(new Projection(1.3333d, 90d, 0.01d, 1000d))
@@ -119,18 +120,18 @@ public class GamePanel extends JPanel implements KeyListener {
 //        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
 //            position = position.translateX(0.05);
 
-//        if (e.getKeyCode() == KeyEvent.VK_A)
-//            yaw -= 0.05;
-//        if (e.getKeyCode() == KeyEvent.VK_D)
-//            yaw += 0.05;
-//        yaw %= 360;
-//
-//        if (e.getKeyCode() == KeyEvent.VK_W)
-//            if (pitch < 90)
-//                pitch += 0.05;
-//        if (e.getKeyCode() == KeyEvent.VK_S)
-//            if (-90 < pitch)
-//                pitch -= 0.05;
+        if (e.getKeyCode() == KeyEvent.VK_A)
+            yaw -= 0.05;
+        if (e.getKeyCode() == KeyEvent.VK_D)
+            yaw += 0.05;
+        yaw %= 360;
+
+        if (e.getKeyCode() == KeyEvent.VK_W)
+            if (pitch < 90)
+                pitch += 0.05;
+        if (e.getKeyCode() == KeyEvent.VK_S)
+            if (-90 < pitch)
+                pitch -= 0.05;
     }
 
     @Override
