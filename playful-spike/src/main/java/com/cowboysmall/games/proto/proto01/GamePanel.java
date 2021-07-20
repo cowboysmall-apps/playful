@@ -10,8 +10,8 @@ import com.cowboysmall.playful.math.scale.Scale;
 import com.cowboysmall.playful.math.translation.Translation;
 import com.cowboysmall.playful.math.view.View;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.stream.Stream;
@@ -59,7 +59,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
     public void update(long delta) {
 
-        theta += delta * 0.025;
+        if (toggleRotation)
+            theta += delta * 0.025;
 
         Matrix4D model = new Translation(1.0d, 1.0d, 0.0d)
                 .preMultiply(new Scale(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));
@@ -67,13 +68,16 @@ public class GamePanel extends JPanel implements KeyListener {
         Matrix4D screen = new Translation(0.0d, 0.0d, 5.0d)
                 .preMultiply(new Projection(1.77777777778d, 90d, 0d, 1000d));
 
-        if (toggleRotation)
-                screen = new Rotation(theta, theta * 0.33d, theta * 0.66d).preMultiply(screen);
+//        Matrix4D screen = new Rotation(theta, theta * 0.33d, theta * 0.66d)
+//                .preMultiply(new Translation(0.0d, 0.0d, 5.0d))
+//                .preMultiply(new Projection(1.77777777778d, 90d, 0d, 1000d));
 
         Matrix4D lookAt = new LookAt(eye, up)
-//                .preMultiply(new Translation(position.getX(), position.getY(), position.getZ()));
-                .preMultiply(new View(pitch, yaw, position));
+                .preMultiply(new View(pitch, yaw, position))
+                .preMultiply(new Translation(position.getX(), position.getY(), position.getZ()));
 
+//        Matrix4D lookAt = new LookAt(eye, up)
+//                .preMultiply(new View(pitch, yaw, position));
 
         gameCanvas.transform(lookAt.preMultiply(screen).preMultiply(model));
     }
@@ -106,26 +110,26 @@ public class GamePanel extends JPanel implements KeyListener {
             toggleRotation = !toggleRotation;
 
         if (e.getKeyCode() == KeyEvent.VK_UP)
-            position = position.translateY(-0.05);
+            position = position.translateZ(-0.25);
         if (e.getKeyCode() == KeyEvent.VK_DOWN)
-            position = position.translateY(0.05);
+            position = position.translateZ(0.25);
         if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            position = position.translateX(0.05);
+            position = position.translateX(0.25);
         if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            position = position.translateX(-0.05);
+            position = position.translateX(-0.25);
 
-//        if (e.getKeyCode() == KeyEvent.VK_A)
-//            yaw += 0.05;
-//        if (e.getKeyCode() == KeyEvent.VK_D)
-//            yaw -= 0.05;
-//        yaw %= 360;
-//
-//        if (e.getKeyCode() == KeyEvent.VK_W)
-//            if (pitch < 90)
-//                pitch -= 0.05;
-//        if (e.getKeyCode() == KeyEvent.VK_S)
-//            if (-90 < pitch)
-//                pitch += 0.05;
+        if (e.getKeyCode() == KeyEvent.VK_J)
+            yaw += 0.05;
+        if (e.getKeyCode() == KeyEvent.VK_L)
+            yaw -= 0.05;
+        yaw %= 360;
+
+        if (e.getKeyCode() == KeyEvent.VK_I)
+            if (pitch < 90)
+                pitch -= 0.05;
+        if (e.getKeyCode() == KeyEvent.VK_K)
+            if (-90 < pitch)
+                pitch += 0.05;
     }
 
     @Override
