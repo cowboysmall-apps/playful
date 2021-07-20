@@ -20,7 +20,7 @@ public class GameFrame extends JFrame {
         add(gamePanel);
         addKeyListener(gamePanel);
 
-        setSize(800, 600);
+        setSize(1600, 900);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

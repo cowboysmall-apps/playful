@@ -14,8 +14,8 @@ public class View extends Matrix4D {
     public View(double pitch, double yaw, Vector4D position) {
 
         super(
-                new Rotation(-pitch, -yaw, 0)
-                        .preMultiply(new Translation(-position.getX(), -position.getY(), -position.getZ()))
+                new Rotation(pitch, yaw, 0)
+                        .preMultiply(new Translation(position.getX(), position.getY(), position.getZ()))
                         .getValues()
         );
     }

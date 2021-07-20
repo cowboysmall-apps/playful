@@ -5,10 +5,7 @@ import com.cowboysmall.playful.graphics.Triangle;
 import com.cowboysmall.playful.math.Matrix4D;
 import com.cowboysmall.playful.math.Vector4D;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +26,8 @@ public class GameCanvas extends BufferedImage {
         super(width, height, BufferedImage.TYPE_INT_RGB);
 
         graphics2D = createGraphics();
-        graphics2D.setBackground(Color.BLACK);
-        graphics2D.setColor(Color.WHITE);
+        graphics2D.setBackground(Color.WHITE);
+        graphics2D.setColor(Color.BLACK);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics2D.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
@@ -47,13 +44,21 @@ public class GameCanvas extends BufferedImage {
 
     //_________________________________________________________________________
 
-    public void transform(Matrix4D matrix4D) {
+    public void transform(Matrix4D transformation) {
 
         transformed =
                 children.stream()
-                        .map(mesh -> mesh.transform(matrix4D))
+                        .map(mesh -> mesh.transform(transformation))
                         .collect(Collectors.toList());
     }
+
+//    public void project(Matrix4D projection) {
+//
+//        transformed =
+//                children.stream()
+//                        .map(mesh -> mesh.project(projection))
+//                        .collect(Collectors.toList());
+//    }
 
     public void draw() {
 
@@ -72,7 +77,8 @@ public class GameCanvas extends BufferedImage {
 
     private void drawTriangle(Triangle triangle) {
 
-        drawLine(triangle.getA(), triangle.getB(), triangle.getC());
+        if (triangle.isNegativeNormal())
+            drawLine(triangle.getA(), triangle.getB(), triangle.getC());
     }
 
     private void drawLine(Vector4D a, Vector4D b, Vector4D c) {
