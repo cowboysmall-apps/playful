@@ -1,4 +1,4 @@
-package com.cowboysmall.playful.math;
+package com.cowboysmall.playful.math.v1;
 
 import java.util.Arrays;
 

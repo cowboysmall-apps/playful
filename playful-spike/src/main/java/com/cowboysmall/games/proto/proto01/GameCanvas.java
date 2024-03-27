@@ -2,8 +2,8 @@ package com.cowboysmall.games.proto.proto01;
 
 import com.cowboysmall.playful.graphics.Mesh;
 import com.cowboysmall.playful.graphics.Triangle;
-import com.cowboysmall.playful.math.Matrix4D;
-import com.cowboysmall.playful.math.Vector4D;
+import com.cowboysmall.playful.math.v1.Matrix4D;
+import com.cowboysmall.playful.math.v1.Vector4D;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,8 +26,8 @@ public class GameCanvas extends BufferedImage {
         super(width, height, BufferedImage.TYPE_INT_RGB);
 
         graphics2D = createGraphics();
-        graphics2D.setBackground(Color.WHITE);
-        graphics2D.setColor(Color.BLACK);
+        graphics2D.setBackground(Color.BLACK);
+        graphics2D.setColor(Color.WHITE);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         graphics2D.setStroke(new BasicStroke(5, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));

@@ -1,11 +1,8 @@
 package com.cowboysmall.games.proto.proto01;
 
 import com.cowboysmall.playful.graphics.Mesh;
-import com.cowboysmall.playful.math.Matrix4D;
-import com.cowboysmall.playful.math.Vector4D;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.cowboysmall.playful.math.v1.Matrix4D;
+import com.cowboysmall.playful.math.v1.Vector4D;
 
 public class GameObject {
 

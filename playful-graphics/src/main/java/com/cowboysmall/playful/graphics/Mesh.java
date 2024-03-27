@@ -1,6 +1,6 @@
 package com.cowboysmall.playful.graphics;
 
-import com.cowboysmall.playful.math.Matrix4D;
+import com.cowboysmall.playful.math.v1.Matrix4D;
 
 import java.util.ArrayList;
 import java.util.List;

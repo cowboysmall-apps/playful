@@ -1,5 +1,6 @@
-package com.cowboysmall.playful.math;
+package com.cowboysmall.playful.math.v1;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -22,6 +23,6 @@ public class Vector4DTest {
         Vector4D vector1 = new Vector4D(1, 2, 3);
         Vector4D vector2 = new Vector4D(4, 5, 6);
 
-        assertThat(vector1.crossProduct(vector2), is(new Vector4D(-3, 6, -3)));
+        assertThat(vector1.crossProduct(vector2), CoreMatchers.is(new Vector4D(-3, 6, -3)));
     }
 }

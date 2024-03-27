@@ -2,7 +2,7 @@ package com.cowboysmall.playful.assets;
 
 import com.cowboysmall.playful.graphics.Mesh;
 import com.cowboysmall.playful.graphics.Triangle;
-import com.cowboysmall.playful.math.Vector4D;
+import com.cowboysmall.playful.math.v1.Vector4D;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;

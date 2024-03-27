@@ -1,14 +1,14 @@
 package com.cowboysmall.games.proto.proto01;
 
 import com.cowboysmall.playful.graphics.Mesh;
-import com.cowboysmall.playful.math.Matrix4D;
-import com.cowboysmall.playful.math.Vector4D;
-import com.cowboysmall.playful.math.lookat.LookAt;
-import com.cowboysmall.playful.math.projection.Projection;
-import com.cowboysmall.playful.math.rotation.Rotation;
-import com.cowboysmall.playful.math.scale.Scale;
-import com.cowboysmall.playful.math.translation.Translation;
-import com.cowboysmall.playful.math.view.View;
+import com.cowboysmall.playful.math.v1.Matrix4D;
+import com.cowboysmall.playful.math.v1.Vector4D;
+import com.cowboysmall.playful.math.v1.lookat.LookAt;
+import com.cowboysmall.playful.math.v1.projection.Projection;
+import com.cowboysmall.playful.math.v1.rotation.Rotation;
+import com.cowboysmall.playful.math.v1.scale.Scale;
+import com.cowboysmall.playful.math.v1.translation.Translation;
+import com.cowboysmall.playful.math.v1.view.View;
 
 import javax.swing.JPanel;
 import java.awt.Graphics;

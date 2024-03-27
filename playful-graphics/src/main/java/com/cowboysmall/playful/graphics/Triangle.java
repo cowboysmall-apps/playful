@@ -1,7 +1,7 @@
 package com.cowboysmall.playful.graphics;
 
-import com.cowboysmall.playful.math.Matrix4D;
-import com.cowboysmall.playful.math.Vector4D;
+import com.cowboysmall.playful.math.v1.Matrix4D;
+import com.cowboysmall.playful.math.v1.Vector4D;
 
 import static java.util.Objects.hash;
 
@@ -67,11 +67,8 @@ public class Triangle {
 
         if (this == other) return true;
 
-        if (other instanceof Triangle) {
-
-            Triangle that = (Triangle) other;
+        if (other instanceof Triangle that)
             return a.equals(that.a) && b.equals(that.b) && c.equals(that.c);
-        }
 
         return false;
     }

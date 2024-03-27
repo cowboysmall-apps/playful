@@ -1,6 +1,6 @@
-package com.cowboysmall.playful.math.rotation;
+package com.cowboysmall.playful.math.v1.rotation;
 
-import com.cowboysmall.playful.math.Matrix4D;
+import com.cowboysmall.playful.math.v1.Matrix4D;
 
 public class Rotation extends Matrix4D {
 
