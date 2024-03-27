@@ -1,6 +1,6 @@
-package com.cowboysmall.playful.math.scale;
+package com.cowboysmall.playful.math.v1.scale;
 
-import com.cowboysmall.playful.math.Matrix4D;
+import com.cowboysmall.playful.math.v1.Matrix4D;
 
 public class Scale extends Matrix4D {
 

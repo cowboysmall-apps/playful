@@ -1,6 +1,6 @@
-package com.cowboysmall.playful.math.translation;
+package com.cowboysmall.playful.math.v1.translation;
 
-import com.cowboysmall.playful.math.Matrix4D;
+import com.cowboysmall.playful.math.v1.Matrix4D;
 
 public class Translation extends Matrix4D {
 

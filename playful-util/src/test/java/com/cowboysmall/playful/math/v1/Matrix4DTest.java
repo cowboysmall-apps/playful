@@ -1,5 +1,6 @@
-package com.cowboysmall.playful.math;
+package com.cowboysmall.playful.math.v1;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -13,7 +14,7 @@ public class Matrix4DTest {
         Matrix4D matrix4D = new Matrix4D(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         Vector4D vector4D = new Vector4D(4, 5, 6);
 
-        assertThat(matrix4D.postMultiply(vector4D), is(new Vector4D(4, 5, 6)));
+        assertThat(matrix4D.postMultiply(vector4D), CoreMatchers.is(new Vector4D(4, 5, 6)));
     }
 
     @Test
@@ -22,7 +23,7 @@ public class Matrix4DTest {
         Matrix4D matrix4D = new Matrix4D(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
         Vector4D vector4D = new Vector4D(4, 5, 6);
 
-        assertThat(matrix4D.preMultiply(vector4D), is(new Vector4D(4, 5, 6)));
+        assertThat(matrix4D.preMultiply(vector4D), CoreMatchers.is(new Vector4D(4, 5, 6)));
     }
 
     @Test
@@ -31,7 +32,7 @@ public class Matrix4DTest {
         Matrix4D matrix4D = new Matrix4D(1, 2, 3, 0, 4, 5, 6, 0, 7, 8, 9, 0, 0, 0, 0, 1);
         Vector4D vector4D = new Vector4D(2, 4, 6);
 
-        assertThat(matrix4D.preMultiply(vector4D), is(new Vector4D(28, 64, 100)));
+        assertThat(matrix4D.preMultiply(vector4D), CoreMatchers.is(new Vector4D(28, 64, 100)));
     }
 
     @Test
@@ -40,7 +41,7 @@ public class Matrix4DTest {
         Matrix4D matrix4D = new Matrix4D(1, 2, 3, 0, 4, 5, 6, 0, 7, 8, 9, 0, 0, 0, 0, 1);
         Vector4D vector4D = new Vector4D(2, 4, 6);
 
-        assertThat(matrix4D.postMultiply(vector4D), is(new Vector4D(60, 72, 84)));
+        assertThat(matrix4D.postMultiply(vector4D), CoreMatchers.is(new Vector4D(60, 72, 84)));
     }
 
     @Test
@@ -48,6 +49,6 @@ public class Matrix4DTest {
 
         Matrix4D matrix4D = new Matrix4D(1, 2, 3, 0, 4, 5, 6, 0, 7, 8, 9, 0, 0, 0, 0, 1);
 
-        assertThat(matrix4D.transpose(), is(new Matrix4D(1, 4, 7, 0, 2, 5, 8, 0, 3, 6, 9, 0, 0, 0, 0, 1)));
+        assertThat(matrix4D.transpose(), CoreMatchers.is(new Matrix4D(1, 4, 7, 0, 2, 5, 8, 0, 3, 6, 9, 0, 0, 0, 0, 1)));
     }
 }

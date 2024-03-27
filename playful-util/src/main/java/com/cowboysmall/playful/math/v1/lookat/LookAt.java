@@ -1,7 +1,7 @@
-package com.cowboysmall.playful.math.lookat;
+package com.cowboysmall.playful.math.v1.lookat;
 
-import com.cowboysmall.playful.math.Matrix4D;
-import com.cowboysmall.playful.math.Vector4D;
+import com.cowboysmall.playful.math.v1.Matrix4D;
+import com.cowboysmall.playful.math.v1.Vector4D;
 
 public class LookAt extends Matrix4D {
 
