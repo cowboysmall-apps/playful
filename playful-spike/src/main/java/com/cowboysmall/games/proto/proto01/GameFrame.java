@@ -1,6 +1,7 @@
 package com.cowboysmall.games.proto.proto01;
 
 import javax.swing.JFrame;
+import java.awt.*;
 
 public class GameFrame extends JFrame {
 
@@ -17,12 +18,17 @@ public class GameFrame extends JFrame {
 
     public void init() {
 
-        add(gamePanel);
+        setSize(1600, 900);
+
         addKeyListener(gamePanel);
 
-        setSize(1600, 900);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        gamePanel.setPreferredSize(getSize());
+        System.out.println(getSize());
+        add(gamePanel);
+        pack();
 
         setVisible(true);
         gamePanel.init();

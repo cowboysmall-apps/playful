@@ -53,6 +53,8 @@ public class GamePanel extends JPanel implements KeyListener {
 
     public void init() {
 
+        System.out.println("(" + getWidth() + ", " + getHeight() + ")");
+
         gameCanvas = new GameCanvas(getWidth(), getHeight());
         Stream.of(assets).forEach(gameCanvas::add);
     }
