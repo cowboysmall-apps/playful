@@ -27,6 +27,21 @@ public class Vector4 {
 
     //_________________________________________________________________________
 
+    public float getX() {
+        return x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public float getZ() {
+        return z;
+    }
+
+
+    //_________________________________________________________________________
+
     public Vector4 add(Vector4 v) {
 
         return new Vector4(x + v.x, y + v.y, z + v.z);

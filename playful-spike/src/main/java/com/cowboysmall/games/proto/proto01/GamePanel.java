@@ -91,6 +91,7 @@ public class GamePanel extends JPanel implements KeyListener {
 
         gameCanvas.draw();
         g.drawImage(gameCanvas, 0, 0, null);
+        gameCanvas.reset();
     }
 
 

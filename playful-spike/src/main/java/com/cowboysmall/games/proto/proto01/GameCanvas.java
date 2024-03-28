@@ -30,7 +30,7 @@ public class GameCanvas extends BufferedImage {
         graphics2D.setColor(Color.WHITE);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        graphics2D.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+        graphics2D.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
     }
 
 
@@ -62,9 +62,13 @@ public class GameCanvas extends BufferedImage {
 
     public void draw() {
 
-        graphics2D.clearRect(0, 0, getWidth(), getHeight());
         if (transformed != null)
             transformed.forEach(this::drawMesh);
+    }
+
+    public void reset() {
+
+        graphics2D.clearRect(0, 0, getWidth(), getHeight());
     }
 
 

@@ -6,20 +6,26 @@ import java.util.concurrent.TimeUnit;
 
 import static java.lang.System.nanoTime;
 
-public abstract class Game implements Runnable {
+public abstract class Game {
 
     private final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
 
-    private boolean running;
 
-    private final long framesPerSecond;
+    private long fps;
+
+    private long currentTime;
+
+    private double frameTime;
+
+    private double delta;
 
 
     //_________________________________________________________________________
 
-    public Game(long framesPerSecond) {
+    public Game(long fps) {
 
-        this.framesPerSecond = framesPerSecond;
+        this.fps = fps;
+        this.frameTime = 1_000_000_000 / (double) fps;
     }
 
 
@@ -27,44 +33,68 @@ public abstract class Game implements Runnable {
 
     public void start() {
 
-        running = true;
-        executorService.scheduleAtFixedRate(this, 0, 10, TimeUnit.MICROSECONDS);
+        init();
+        startGameLoop();
     }
 
     public void stop() {
 
-        running = false;
+        stopGameLoop();
+        destroy();
     }
 
 
     //_________________________________________________________________________
 
-    @Override
-    public void run() {
+    private void gameLoop() {
 
-        double frameTime = 1000000000d / framesPerSecond;
-        double delta = 0;
+        long latestTime = nanoTime();
+        delta += (latestTime - currentTime) / frameTime;
+        currentTime = latestTime;
 
-        long current = nanoTime();
-        while (running) {
+        while (delta >= 1) {
 
-            long latest = nanoTime();
-            delta += (latest - current) / frameTime;
-            current = latest;
+            update(delta);
+            delta--;
+        }
 
-            while (delta >= 1) {
+        render();
+    }
 
-                update(delta);
-                render();
-                delta--;
-            }
+
+    //_________________________________________________________________________
+
+    private void startGameLoop() {
+
+        currentTime = nanoTime();
+        executorService.scheduleAtFixedRate(this::gameLoop, (long) frameTime, (long) frameTime, TimeUnit.NANOSECONDS);
+    }
+
+    private void stopGameLoop() {
+
+        executorService.shutdown();
+        try {
+
+            if (!executorService.awaitTermination((long) frameTime, TimeUnit.NANOSECONDS))
+                executorService.shutdownNow();
+
+        } catch (InterruptedException e) {
+
+            executorService.shutdownNow();
+            Thread.currentThread().interrupt();
         }
     }
 
 
     //_________________________________________________________________________
 
+    protected void init() {
+    }
+
     protected abstract void update(double delta);
 
     protected abstract void render();
+
+    protected void destroy() {
+    }
 }
