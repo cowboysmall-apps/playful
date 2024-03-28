@@ -76,6 +76,38 @@ public class Quaternion {
         );
     }
 
+
+    //_________________________________________________________________________
+
+    public Matrix4 toMatrix() {
+
+        float s = 2.0f / squareLength();
+
+        float sx = s * x;
+        float sy = s * y;
+        float sz = s * z;
+
+        float a1 = 1.0f - y * sy - z * sz;
+        float a2 = x * sy - w * sz;
+        float a3 = x * sz + w * sy;
+
+        float b1 = x * sy + w * sz;
+        float b2 = 1.0f - x * sx - z * sz;
+        float b3 = y * sx - w * sx;
+
+        float c1 = x * sz - w * sy;
+        float c2 = y * sz + w * sx;
+        float c3 = 1.0f - x * sx - y * sy;
+
+        return new Matrix4(
+                a1, a2, a3, 0,
+                b1, b2, b3, 0,
+                c1, c2, c3, 0,
+                0, 0, 0, 1
+        );
+    }
+
+
     //_________________________________________________________________________
 
     @Override

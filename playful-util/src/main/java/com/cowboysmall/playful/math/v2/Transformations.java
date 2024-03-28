@@ -64,35 +64,4 @@ public class Transformations {
                 0, 0, 0, 1
         );
     }
-
-
-    //_________________________________________________________________________
-
-    public static Matrix4 rotate(Quaternion q) {
-
-        float s = 2.0f / q.squareLength();
-
-        float sx = s * q.x;
-        float sy = s * q.y;
-        float sz = s * q.z;
-
-        float a1 = 1.0f - q.y * sy - q.z * sz;
-        float a2 = q.x * sy - q.w * sz;
-        float a3 = q.x * sz + q.w * sy;
-
-        float b1 = q.x * sy + q.w * sz;
-        float b2 = 1.0f - q.x * sx - q.z * sz;
-        float b3 = q.y * sx - q.w * sx;
-
-        float c1 = q.x * sz - q.w * sy;
-        float c2 = q.y * sz + q.w * sx;
-        float c3 = 1.0f - q.x * sx - q.y * sy;
-
-        return new Matrix4(
-                a1, a2, a3, 0,
-                b1, b2, b3, 0,
-                c1, c2, c3, 0,
-                0, 0, 0, 1
-        );
-    }
 }

@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements KeyListener {
         Stream.of(assets).forEach(gameCanvas::add);
     }
 
-    public void update(long delta) {
+    public void update(double delta) {
 
         if (toggleRotation)
             theta += delta * 0.025;
