@@ -1,14 +1,15 @@
 package com.cowboysmall.playful.math.v2;
 
+
 import java.util.Objects;
 
 import static java.lang.Math.sqrt;
 
 public class Quaternion {
 
-    float w, x, y, z;
+    double w, x, y, z;
 
-    public Quaternion(float w, float x, float y, float z) {
+    public Quaternion(double w, double x, double y, double z) {
 
         this.w = w;
         this.x = x;
@@ -32,7 +33,7 @@ public class Quaternion {
 
     //_________________________________________________________________________
 
-    public float dot(Quaternion q) {
+    public double dot(Quaternion q) {
 
         return (w * q.w) + (x * q.x) + (y * q.y) + (z * q.z);
     }
@@ -40,24 +41,24 @@ public class Quaternion {
 
     //_________________________________________________________________________
 
-    public Quaternion scale(float factor) {
+    public Quaternion scale(double factor) {
 
         return new Quaternion(factor * w, factor * x, factor * y, factor * z);
     }
 
-    public float squareLength() {
+    public double squareLength() {
 
         return dot(this);
     }
 
-    public float length() {
+    public double length() {
 
-        return (float) sqrt(squareLength());
+        return sqrt(squareLength());
     }
 
     public Quaternion normalise() {
 
-        return scale(1.0f / length());
+        return scale(1.0d / length());
     }
 
 
@@ -65,9 +66,9 @@ public class Quaternion {
 
     public Vector4 rotate(Vector4 v) {
 
-        float vm = 2.0f * (x * v.x + y * v.y + z * v.z);
-        float cm = 2.0f * w;
-        float pm = cm * w - 1.0f;
+        double vm = 2.0d * (x * v.x + y * v.y + z * v.z);
+        double cm = 2.0d * w;
+        double pm = cm * w - 1.0d;
 
         return new Vector4(
                 pm * v.x + vm * x + cm * (y * v.z - z * v.y),
@@ -81,23 +82,23 @@ public class Quaternion {
 
     public Matrix4 toMatrix() {
 
-        float s = 2.0f / squareLength();
+        double s = 2.0d / squareLength();
 
-        float sx = s * x;
-        float sy = s * y;
-        float sz = s * z;
+        double sx = s * x;
+        double sy = s * y;
+        double sz = s * z;
 
-        float a1 = 1.0f - y * sy - z * sz;
-        float a2 = x * sy - w * sz;
-        float a3 = x * sz + w * sy;
+        double a1 = 1.0d - y * sy - z * sz;
+        double a2 = x * sy - w * sz;
+        double a3 = x * sz + w * sy;
 
-        float b1 = x * sy + w * sz;
-        float b2 = 1.0f - x * sx - z * sz;
-        float b3 = y * sx - w * sx;
+        double b1 = x * sy + w * sz;
+        double b2 = 1.0d - x * sx - z * sz;
+        double b3 = y * sx - w * sx;
 
-        float c1 = x * sz - w * sy;
-        float c2 = y * sz + w * sx;
-        float c3 = 1.0f - x * sx - y * sy;
+        double c1 = x * sz - w * sy;
+        double c2 = y * sz + w * sx;
+        double c3 = 1.0d - x * sx - y * sy;
 
         return new Matrix4(
                 a1, a2, a3, 0,
@@ -117,10 +118,10 @@ public class Quaternion {
         if (o == null || getClass() != o.getClass()) return false;
 
         Quaternion that = (Quaternion) o;
-        return Float.compare(w, that.w) == 0
-                && Float.compare(x, that.x) == 0
-                && Float.compare(y, that.y) == 0
-                && Float.compare(z, that.z) == 0;
+        return Double.compare(w, that.w) == 0
+                && Double.compare(x, that.x) == 0
+                && Double.compare(y, that.y) == 0
+                && Double.compare(z, that.z) == 0;
     }
 
     @Override

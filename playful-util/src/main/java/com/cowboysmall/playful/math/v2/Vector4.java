@@ -1,14 +1,15 @@
 package com.cowboysmall.playful.math.v2;
 
+
 import java.util.Objects;
 
 import static java.lang.Math.sqrt;
 
 public class Vector4 {
 
-    float x, y, z, w;
+    double x, y, z, w;
 
-    public Vector4(float x, float y, float z, float w) {
+    public Vector4(double x, double y, double z, double w) {
 
         this.x = x;
         this.y = y;
@@ -16,7 +17,7 @@ public class Vector4 {
         this.w = w;
     }
 
-    public Vector4(float x, float y, float z) {
+    public Vector4(double x, double y, double z) {
 
         this.x = x;
         this.y = y;
@@ -27,15 +28,15 @@ public class Vector4 {
 
     //_________________________________________________________________________
 
-    public float getX() {
+    public double getX() {
         return x;
     }
 
-    public float getY() {
+    public double getY() {
         return y;
     }
 
-    public float getZ() {
+    public double getZ() {
         return z;
     }
 
@@ -55,7 +56,7 @@ public class Vector4 {
 
     //_________________________________________________________________________
 
-    public float dot(Vector4 v) {
+    public double dot(Vector4 v) {
 
         return (x * v.x) + (y * v.y) + (z * v.z);
     }
@@ -72,24 +73,24 @@ public class Vector4 {
 
     //_________________________________________________________________________
 
-    public Vector4 scale(float factor) {
+    public Vector4 scale(double factor) {
 
         return new Vector4(factor * x, factor * y, factor * z);
     }
 
-    public float squareLength() {
+    public double squareLength() {
 
         return dot(this);
     }
 
-    public float length() {
+    public double length() {
 
         return (float) sqrt(squareLength());
     }
 
     public Vector4 normalise() {
 
-        return scale(1.0f / length());
+        return scale(1.0d / length());
     }
 
 
@@ -102,10 +103,10 @@ public class Vector4 {
         if (o == null || getClass() != o.getClass()) return false;
 
         Vector4 vector4 = (Vector4) o;
-        return Float.compare(x, vector4.x) == 0
-                && Float.compare(y, vector4.y) == 0
-                && Float.compare(z, vector4.z) == 0
-                && Float.compare(w, vector4.w) == 0;
+        return Double.compare(x, vector4.x) == 0
+                && Double.compare(y, vector4.y) == 0
+                && Double.compare(z, vector4.z) == 0
+                && Double.compare(w, vector4.w) == 0;
     }
 
     @Override

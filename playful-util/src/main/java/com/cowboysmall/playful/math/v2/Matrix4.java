@@ -1,12 +1,13 @@
 package com.cowboysmall.playful.math.v2;
 
+
 import java.util.Arrays;
 
 public class Matrix4 {
 
-    float[] m;
+    double[] m;
 
-    public Matrix4(float... m) {
+    public Matrix4(double... m) {
 
         this.m = m;
     }

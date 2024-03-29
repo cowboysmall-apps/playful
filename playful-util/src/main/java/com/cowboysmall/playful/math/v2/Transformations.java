@@ -1,5 +1,6 @@
 package com.cowboysmall.playful.math.v2;
 
+
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
 

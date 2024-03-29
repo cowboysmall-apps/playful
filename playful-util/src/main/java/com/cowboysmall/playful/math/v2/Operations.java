@@ -1,5 +1,6 @@
 package com.cowboysmall.playful.math.v2;
 
+
 public class Operations {
 
     public static Matrix4 outer(Vector4 v1, Vector4 v2) {

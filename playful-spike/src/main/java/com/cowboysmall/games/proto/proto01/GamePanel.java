@@ -27,8 +27,8 @@ public class GamePanel extends JPanel implements KeyListener {
     private GameCanvas gameCanvas;
 
     private Vector4D position = new Vector4D();
-    private Vector4D eye = new Vector4D(0d, 0d, -0.01d);
-    //    private Vector4D eye = new Vector4D(0d, 0d, 0.01d);
+    //    private Vector4D eye = new Vector4D(0d, 0d, -0.01d);
+    private Vector4D eye = new Vector4D(0d, 0d, 0.01d);
     private Vector4D up = new Vector4D(0d, 1d, 0d);
 
     private double pitch = 0;
