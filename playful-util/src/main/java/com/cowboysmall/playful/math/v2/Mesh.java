@@ -45,16 +45,6 @@ public class Mesh {
         );
     }
 
-//    public Mesh project(Matrix4D projection) {
-//
-//        return new Mesh(
-//                triangles.stream()
-//                        .filter(Triangle::isNegativeNormal)
-//                        .map(triangle -> triangle.transform(projection))
-//                        .collect(Collectors.toList())
-//        );
-//    }
-
 
     //_________________________________________________________________________
 
@@ -77,15 +67,18 @@ public class Mesh {
     //_________________________________________________________________________
 
     @Override
+    public String toString() {
+
+        return "Mesh{triangles = %s}".formatted(triangles);
+    }
+
+    @Override
     public boolean equals(Object other) {
 
         if (this == other) return true;
 
-        if (other instanceof Mesh) {
-
-            Mesh mesh = (Mesh) other;
+        if (other instanceof Mesh mesh)
             return triangles.equals(mesh.triangles);
-        }
 
         return false;
     }

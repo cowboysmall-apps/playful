@@ -18,12 +18,12 @@ public class Transformations {
         );
     }
 
-    public static Matrix4 translate(double dx, double dy, double dz) {
+    public static Matrix4 translate(double dX, double dY, double dZ) {
 
         return new Matrix4(
-                1, 0, 0, dx,
-                0, 1, 0, dy,
-                0, 0, 1, dz,
+                1, 0, 0, dX,
+                0, 1, 0, dY,
+                0, 0, 1, dZ,
                 0, 0, 0, 1
         );
     }
@@ -67,7 +67,7 @@ public class Transformations {
                 0, 0, 0, 1
         );
     }
-    
+
     public static Matrix4 scale(double factorX, double factorY, double factorZ) {
 
         return new Matrix4(

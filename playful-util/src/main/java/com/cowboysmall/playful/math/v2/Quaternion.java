@@ -111,17 +111,25 @@ public class Quaternion {
 
     //_________________________________________________________________________
 
+
+    @Override
+    public String toString() {
+
+        return "Quaternion{w = %s, x = %s, y = %s, z = %s}".formatted(w, x, y, z);
+    }
+
     @Override
     public boolean equals(Object o) {
 
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        Quaternion that = (Quaternion) o;
-        return Double.compare(w, that.w) == 0
-                && Double.compare(x, that.x) == 0
-                && Double.compare(y, that.y) == 0
-                && Double.compare(z, that.z) == 0;
+        if (o instanceof Quaternion that)
+            return Double.compare(w, that.w) == 0
+                    && Double.compare(x, that.x) == 0
+                    && Double.compare(y, that.y) == 0
+                    && Double.compare(z, that.z) == 0;
+
+        return false;
     }
 
     @Override

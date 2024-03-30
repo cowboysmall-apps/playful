@@ -192,6 +192,15 @@ public class Matrix4D {
 
     //_________________________________________________________________________
 
+
+    @Override
+    public String toString() {
+
+        return "Matrix4D{" +
+                "values=" + Arrays.toString(values) +
+                '}';
+    }
+
     @Override
     public boolean equals(Object other) {
 

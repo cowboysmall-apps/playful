@@ -27,7 +27,7 @@ public class GamePanel extends JPanel implements KeyListener {
     private GameCanvas gameCanvas;
 
     private Vector4D position = new Vector4D();
-    //    private Vector4D eye = new Vector4D(0d, 0d, -0.01d);
+
     private Vector4D eye = new Vector4D(0d, 0d, 0.01d);
     private Vector4D up = new Vector4D(0d, 1d, 0d);
 
@@ -53,8 +53,6 @@ public class GamePanel extends JPanel implements KeyListener {
 
     public void init() {
 
-        System.out.println("(" + getWidth() + ", " + getHeight() + ")");
-
         gameCanvas = new GameCanvas(getWidth(), getHeight());
         Stream.of(assets).forEach(gameCanvas::add);
     }
@@ -64,30 +62,26 @@ public class GamePanel extends JPanel implements KeyListener {
         if (toggleRotation)
             theta += delta * 0.025;
 
-        Matrix4D model = new Translation(1.0d, 1.0d, 0.0d)
-                .preMultiply(new Scale(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));
-
-//        Matrix4D model = new Scale(100.0d, 100.0d, 0.0d)
-//                .preMultiply(new Translation(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));
-
-//        Matrix4D screen = new Translation(0.0d, 0.0d, 5.0d)
-//                .preMultiply(new Projection(1.77777777778d, 90d, 0d, 1000d));
-
-        Matrix4D screen =
-                new Rotation(theta, theta * 0.33d, theta * 0.66d)
-                        .preMultiply(new Translation(0.0d, 0.0d, 5.0d))
-                        .preMultiply(new Projection(1.77777777778d, 90d, 0d, 1000d));
-
         Matrix4D lookAt =
                 new LookAt(eye, up)
                         .preMultiply(new View(pitch, yaw, position))
                         .preMultiply(new Translation(position.getX(), position.getY(), position.getZ()));
 
-//        Matrix4D lookAt = new LookAt(eye, up)
-//                .preMultiply(new View(pitch, yaw, position));
+        Matrix4D model =
+                new Rotation(theta, theta * 0.33d, theta * 0.66d)
+                        .preMultiply(new Translation(0.0d, 0.0d, 5.0d))
+                        .preMultiply(new Projection(1.77777777778d, 90.0d, 0.01d, 1000.0d));
 
-//        gameCanvas.transform(lookAt.preMultiply(screen).preMultiply(model));
-        gameCanvas.transform(screen.preMultiply(model));
+        System.out.println(model);
+
+        Matrix4D screen =
+                new Translation(1.0d, 1.0d, 0.0d)
+                        .preMultiply(new Scale(getWidth() / 2.0d, getHeight() / 2.0d, 1.0d));
+
+        System.out.println(screen);
+
+
+        gameCanvas.transform(lookAt.preMultiply(model).preMultiply(screen));
     }
 
     @Override

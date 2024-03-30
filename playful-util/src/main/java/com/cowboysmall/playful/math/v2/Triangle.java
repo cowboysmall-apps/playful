@@ -61,13 +61,22 @@ public class Triangle {
 
     //_________________________________________________________________________
 
+
+    @Override
+    public String toString() {
+
+        return "Triangle{a = %s, b = %s, c = %s}".formatted(a, b, c);
+    }
+
     @Override
     public boolean equals(Object other) {
 
         if (this == other) return true;
 
         if (other instanceof Triangle that)
-            return a.equals(that.a) && b.equals(that.b) && c.equals(that.c);
+            return a.equals(that.a)
+                    && b.equals(that.b)
+                    && c.equals(that.c);
 
         return false;
     }

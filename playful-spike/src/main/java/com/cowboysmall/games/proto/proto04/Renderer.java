@@ -4,26 +4,109 @@ import com.cowboysmall.playful.math.v2.Mesh;
 import com.cowboysmall.playful.math.v2.Triangle;
 import com.cowboysmall.playful.math.v2.Vector4;
 
-public interface Renderer {
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
 
-    void init();
+public class Renderer extends JPanel implements Renderable {
 
-    void reset();
+    private final Color foreground;
+    private final Color background;
+    private final State state;
 
-    void render();
-
-
-
-    void drawLine(Vector4 a, Vector4 b);
-
-    void drawTriangle(Triangle triangle);
-
-    void drawMesh(Mesh mesh);
+    private BufferedImage bufferedImage;
+    private Graphics2D graphics2D;
 
 
-//    void drawPoint();
+    //_________________________________________________________________________
 
-    void drawRectangle();
+    public Renderer(Color foreground, Color background, State state) {
 
-    void drawCircle();
+        this.foreground = foreground;
+        this.background = background;
+        this.state = state;
+    }
+
+    public Renderer(State state) {
+
+        this(Color.WHITE, Color.BLACK, state);
+    }
+
+
+    //_________________________________________________________________________
+
+    public final void init() {
+
+        bufferedImage = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+
+        graphics2D = bufferedImage.createGraphics();
+        graphics2D.setBackground(background);
+        graphics2D.setColor(foreground);
+        graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        graphics2D.setStroke(new BasicStroke(2, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+    }
+
+    public final void reset() {
+
+        graphics2D.clearRect(0, 0, getWidth(), getHeight());
+    }
+
+
+    @Override
+    public final void render() {
+
+        SwingUtilities.invokeLater(this::repaint);
+    }
+
+
+    //_________________________________________________________________________
+
+    @Override
+    public void drawLine(Vector4 a, Vector4 b) {
+
+        graphics2D.drawLine((int) a.getX(), (int) a.getY(), (int) b.getX(), (int) b.getY());
+    }
+
+    @Override
+    public void drawTriangle(Triangle triangle) {
+
+        if (triangle.isNegativeNormal()) {
+
+            drawLine(triangle.getA(), triangle.getB());
+            drawLine(triangle.getB(), triangle.getC());
+            drawLine(triangle.getC(), triangle.getA());
+        }
+    }
+
+    @Override
+    public void drawRectangle() {
+
+    }
+
+    @Override
+    public void drawCircle() {
+
+    }
+
+    @Override
+    public void drawMesh(Mesh mesh) {
+
+        mesh.getTriangles().forEach(this::drawTriangle);
+    }
+
+
+    //_________________________________________________________________________
+
+    @Override
+    protected void paintComponent(Graphics g) {
+
+        super.paintComponent(g);
+        g.drawImage(bufferedImage, 0, 0, null);
+    }
 }

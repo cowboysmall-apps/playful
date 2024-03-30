@@ -6,40 +6,46 @@ import java.awt.GraphicsEnvironment;
 
 public class Windows {
 
-    public static void createWindow(int width, int height, RendererPanel rendererPanel) {
+    public static JFrame createWindow(int width, int height, Renderer renderer, State state) {
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.addKeyListener(new Input());
+        window.addKeyListener(state);
+        window.addComponentListener(state);
 
         window.setSize(width, height);
         window.setLocationRelativeTo(null);
 
-        rendererPanel.setPreferredSize(window.getSize());
-        window.add(rendererPanel);
+        renderer.setPreferredSize(window.getSize());
+        window.add(renderer);
         window.pack();
 
         window.setVisible(true);
-        rendererPanel.init();
+        renderer.init();
+
+        return window;
     }
 
-    public static void createFullScreenWindow(RendererPanel rendererPanel) {
+    public static JFrame createFullScreenWindow(Renderer renderer, State state) {
 
         GraphicsEnvironment graphics = GraphicsEnvironment.getLocalGraphicsEnvironment();
         GraphicsDevice device = graphics.getDefaultScreenDevice();
 
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.addKeyListener(new Input());
+        window.addKeyListener(state);
+        window.addComponentListener(state);
 
         window.setUndecorated(true);
         window.setResizable(false);
 
-        rendererPanel.setPreferredSize(window.getSize());
-        window.add(rendererPanel);
+        renderer.setPreferredSize(window.getSize());
+        window.add(renderer);
         window.pack();
 
         device.setFullScreenWindow(window);
-        rendererPanel.init();
+        renderer.init();
+
+        return window;
     }
 }

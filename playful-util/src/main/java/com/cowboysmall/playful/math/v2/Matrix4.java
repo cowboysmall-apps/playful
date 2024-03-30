@@ -16,12 +16,20 @@ public class Matrix4 {
     //_________________________________________________________________________
 
     @Override
+    public String toString() {
+
+        return "Matrix4{m = %s}".formatted(Arrays.toString(m));
+    }
+
+    @Override
     public boolean equals(Object o) {
 
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
 
-        return Arrays.equals(m, ((Matrix4) o).m);
+        if (o instanceof Matrix4 that)
+            return Arrays.equals(m, that.m);
+
+        return false;
     }
 
     @Override
