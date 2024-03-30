@@ -74,8 +74,7 @@ public class Vector4D {
 
     public Vector4D multiply(Matrix4D matrix4D) {
 
-        Vector4D vector4D = matrix4D.postMultiply(this);
-        return vector4D.scale(vector4D.getW() != 0.0d ? 1.0d / vector4D.getW() : 1);
+        return matrix4D.postMultiply(this);
     }
 
 

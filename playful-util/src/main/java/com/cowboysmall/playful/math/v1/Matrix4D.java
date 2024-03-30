@@ -64,24 +64,28 @@ public class Matrix4D {
 
         double[] vectorValues = vector.getValues();
 
-        return new Vector4D(
+        Vector4D vector4D = new Vector4D(
                 values[0] * vectorValues[0] + values[4] * vectorValues[1] + values[8] * vectorValues[2] + values[12] * vectorValues[3],
                 values[1] * vectorValues[0] + values[5] * vectorValues[1] + values[9] * vectorValues[2] + values[13] * vectorValues[3],
                 values[2] * vectorValues[0] + values[6] * vectorValues[1] + values[10] * vectorValues[2] + values[14] * vectorValues[3],
                 values[3] * vectorValues[0] + values[7] * vectorValues[1] + values[11] * vectorValues[2] + values[15] * vectorValues[3]
         );
+
+        return vector4D.scale(vector4D.getW() != 0.0d ? 1.0d / vector4D.getW() : 1);
     }
 
     public Vector4D preMultiply(Vector4D vector) {
 
         double[] vectorValues = vector.getValues();
 
-        return new Vector4D(
+        Vector4D vector4D = new Vector4D(
                 values[0] * vectorValues[0] + values[1] * vectorValues[1] + values[2] * vectorValues[2] + values[3] * vectorValues[3],
                 values[4] * vectorValues[0] + values[5] * vectorValues[1] + values[6] * vectorValues[2] + values[7] * vectorValues[3],
                 values[8] * vectorValues[0] + values[9] * vectorValues[1] + values[10] * vectorValues[2] + values[11] * vectorValues[3],
                 values[12] * vectorValues[0] + values[13] * vectorValues[1] + values[14] * vectorValues[2] + values[15] * vectorValues[3]
         );
+
+        return vector4D.scale(vector4D.getW() != 0.0d ? 1.0d / vector4D.getW() : 1);
     }
 
     public Matrix4D multiply(double scalar) {

@@ -1,5 +1,7 @@
 package com.cowboysmall.games.proto.proto04;
 
+import com.cowboysmall.playful.math.v2.Mesh;
+import com.cowboysmall.playful.math.v2.Triangle;
 import com.cowboysmall.playful.math.v2.Vector4;
 
 public interface Renderer {
@@ -11,15 +13,17 @@ public interface Renderer {
     void render();
 
 
-//    void drawPoint();
 
     void drawLine(Vector4 a, Vector4 b);
 
-    void drawTriangle(Vector4 a, Vector4 b, Vector4 c);
+    void drawTriangle(Triangle triangle);
+
+    void drawMesh(Mesh mesh);
+
+
+//    void drawPoint();
 
     void drawRectangle();
 
     void drawCircle();
-
-    void drawMesh();
 }

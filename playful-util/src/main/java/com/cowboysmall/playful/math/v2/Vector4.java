@@ -40,6 +40,10 @@ public class Vector4 {
         return z;
     }
 
+    public double getW() {
+        return w;
+    }
+
 
     //_________________________________________________________________________
 

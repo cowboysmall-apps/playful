@@ -1,5 +1,7 @@
 package com.cowboysmall.games.proto.proto04;
 
+import com.cowboysmall.playful.math.v2.Mesh;
+import com.cowboysmall.playful.math.v2.Triangle;
 import com.cowboysmall.playful.math.v2.Vector4;
 
 import javax.swing.JPanel;
@@ -44,12 +46,12 @@ public class RendererPanel extends JPanel implements Renderer {
         graphics2D.setColor(foreground);
         graphics2D.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         graphics2D.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        graphics2D.setStroke(new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
+        graphics2D.setStroke(new BasicStroke(1, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL));
     }
 
     public final void reset() {
 
-        graphics2D.clearRect(0, 0, getWidth(), getHeight());
+//        graphics2D.clearRect(0, 0, getWidth(), getHeight());
     }
 
 
@@ -75,11 +77,11 @@ public class RendererPanel extends JPanel implements Renderer {
     }
 
     @Override
-    public void drawTriangle(Vector4 a, Vector4 b, Vector4 c) {
+    public void drawTriangle(Triangle triangle) {
 
-        graphics2D.drawLine((int) a.getX(), (int) a.getY(), (int) b.getX(), (int) b.getY());
-        graphics2D.drawLine((int) b.getX(), (int) b.getY(), (int) c.getX(), (int) c.getY());
-        graphics2D.drawLine((int) c.getX(), (int) c.getY(), (int) a.getX(), (int) a.getY());
+        drawLine(triangle.getA(), triangle.getB());
+        drawLine(triangle.getB(), triangle.getC());
+        drawLine(triangle.getC(), triangle.getA());
     }
 
     @Override
@@ -93,8 +95,9 @@ public class RendererPanel extends JPanel implements Renderer {
     }
 
     @Override
-    public void drawMesh() {
+    public void drawMesh(Mesh mesh) {
 
+        mesh.getTriangles().forEach(this::drawTriangle);
     }
 
 
@@ -105,5 +108,6 @@ public class RendererPanel extends JPanel implements Renderer {
 
         super.paintComponent(g);
         g.drawImage(bufferedImage, 0, 0, null);
+        graphics2D.clearRect(0, 0, getWidth(), getHeight());
     }
 }

@@ -13,11 +13,10 @@ public class ObjectFileLoader {
 
     public Mesh loadFromObjectFile(String fileName) {
 
-        List<String> lines = extracted("%s%s".formatted(System.getProperty("user.dir"), fileName));
+        List<String[]> lines = extracted("%s%s".formatted(System.getProperty("user.dir"), fileName));
 
         List<Vector4> vectors =
                 lines.stream()
-                        .map(line -> line.split(" "))
                         .filter(array -> array[0].equals("v"))
                         .map(array ->
                                 new Vector4(
@@ -27,9 +26,8 @@ public class ObjectFileLoader {
                         )
                         .toList();
 
-        List<Triangle> list =
+        List<Triangle> triangles =
                 lines.stream()
-                        .map(line -> line.split(" "))
                         .filter(array -> array[0].equals("f"))
                         .map(array ->
                                 new Triangle(
@@ -40,14 +38,16 @@ public class ObjectFileLoader {
                         )
                         .toList();
 
-        return new Mesh(list);
+        return new Mesh(triangles);
     }
 
-    private static List<String> extracted(String filePath) {
+    private static List<String[]> extracted(String filePath) {
 
         try (Stream<String> lines = Files.lines(Paths.get(filePath))) {
 
-            return lines.toList();
+            return lines
+                    .map(line -> line.split(" "))
+                    .toList();
 
         } catch (Exception e) {
 
