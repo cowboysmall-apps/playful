@@ -101,6 +101,16 @@ public class GamePanel extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
 
+        if (e.getKeyCode() == KeyEvent.VK_UP)
+            position = position.translateZ(-0.25);
+        if (e.getKeyCode() == KeyEvent.VK_DOWN)
+            position = position.translateZ(0.25);
+        if (e.getKeyCode() == KeyEvent.VK_LEFT)
+            position = position.translateX(0.25);
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
+            position = position.translateX(-0.25);
+
+
         if (e.getKeyCode() == KeyEvent.VK_W)
             up(amount);
         if (e.getKeyCode() == KeyEvent.VK_S)
@@ -110,17 +120,10 @@ public class GamePanel extends JPanel implements KeyListener {
         if (e.getKeyCode() == KeyEvent.VK_D)
             left(-amount);
 
+
         if (e.getKeyCode() == KeyEvent.VK_R)
             toggleRotation = !toggleRotation;
 
-        if (e.getKeyCode() == KeyEvent.VK_UP)
-            position = position.translateZ(-0.25);
-        if (e.getKeyCode() == KeyEvent.VK_DOWN)
-            position = position.translateZ(0.25);
-        if (e.getKeyCode() == KeyEvent.VK_LEFT)
-            position = position.translateX(0.25);
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT)
-            position = position.translateX(-0.25);
 
         if (e.getKeyCode() == KeyEvent.VK_J)
             yaw += 0.05;

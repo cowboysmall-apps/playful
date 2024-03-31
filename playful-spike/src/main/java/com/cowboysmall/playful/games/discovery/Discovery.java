@@ -2,9 +2,9 @@ package com.cowboysmall.playful.games.discovery;
 
 import com.cowboysmall.playful.games.Game;
 import com.cowboysmall.playful.games.Window;
-import com.cowboysmall.playful.math.Matrix4D;
 import com.cowboysmall.playful.graphics.Mesh;
 import com.cowboysmall.playful.graphics.ObjectFileLoader;
+import com.cowboysmall.playful.math.Matrix4D;
 
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -57,14 +57,17 @@ public class Discovery extends Game {
         if (toggleRotation)
             theta += delta * 0.025;
 
-        Matrix4D model =
+        Matrix4D projection = projection(getRenderer().getAspectRatio(), 90.0d, 0.01d, 1000.0d);
+
+        Matrix4D model1 =
                 multiply(
-                        projection(getRenderer().getAspectRatio(), 90.0d, 0.01d, 1000.0d),
+                        projection,
                         translate(0.0d, sin(theta), 5.0d),
                         rotateZ(theta * 0.66d),
                         rotateY(theta * 0.33d),
                         rotateX(theta)
                 );
+
 
         Matrix4D screen1 =
                 multiply(
@@ -84,9 +87,27 @@ public class Discovery extends Game {
                         translate(1.5d, 1.0d, 0.0d)
                 );
 
-        getRenderer().drawMesh(cube.transform(multiply(screen1, model)));
-        getRenderer().drawMesh(cube.transform(multiply(screen2, model)));
-        getRenderer().drawMesh(cube.transform(multiply(screen3, model)));
+
+        Matrix4D model2 =
+                multiply(
+                        projection,
+                        translate(0.0d, 0.0d, 5.0d)
+                );
+
+
+        Matrix4D screen4 =
+                multiply(
+                        scale(size.getWidth() / 2.0d, size.getHeight() / 2.0d, 1.0d),
+                        translate(1.0d, 1.0d, 0.0d)
+                );
+
+        getRenderer().drawMesh(cube.transform(multiply(screen1, model1)));
+        getRenderer().drawMesh(cube.transform(multiply(screen2, model1)));
+        getRenderer().drawMesh(cube.transform(multiply(screen3, model1)));
+
+        for (int i = 0; i < 8; i++)
+            for (int j = 0; j < 32; j++)
+                getRenderer().drawMesh(cube.transform(translate(j - 16d, -8.0d, i + 8.0d)).transform(multiply(screen4, model2)));
     }
 
 
