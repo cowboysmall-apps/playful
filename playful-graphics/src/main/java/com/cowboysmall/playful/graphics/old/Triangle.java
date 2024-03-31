@@ -1,10 +1,8 @@
-package com.cowboysmall.playful.graphics;
+package com.cowboysmall.playful.graphics.old;
 
+import com.cowboysmall.playful.math.old.Matrix4D;
+import com.cowboysmall.playful.math.old.Vector4D;
 
-import com.cowboysmall.playful.math.Matrix4D;
-import com.cowboysmall.playful.math.Vector4D;
-
-import static com.cowboysmall.playful.math.Operations.multiply;
 import static java.util.Objects.hash;
 
 public class Triangle {
@@ -44,9 +42,9 @@ public class Triangle {
     public Triangle transform(Matrix4D transformation) {
 
         return new Triangle(
-                multiply(transformation, a),
-                multiply(transformation, b),
-                multiply(transformation, c)
+                a.multiply(transformation),
+                b.multiply(transformation),
+                c.multiply(transformation)
         );
     }
 
@@ -58,18 +56,11 @@ public class Triangle {
         Vector4D first = b.subtract(a);
         Vector4D second = c.subtract(a);
 
-        return first.cross(second).getZ() < 0;
+        return first.crossProduct(second).getZ() < 0;
     }
 
 
     //_________________________________________________________________________
-
-
-    @Override
-    public String toString() {
-
-        return "Triangle{a = %s, b = %s, c = %s}".formatted(a, b, c);
-    }
 
     @Override
     public boolean equals(Object other) {
@@ -77,9 +68,7 @@ public class Triangle {
         if (this == other) return true;
 
         if (other instanceof Triangle that)
-            return a.equals(that.a)
-                    && b.equals(that.b)
-                    && c.equals(that.c);
+            return a.equals(that.a) && b.equals(that.b) && c.equals(that.c);
 
         return false;
     }

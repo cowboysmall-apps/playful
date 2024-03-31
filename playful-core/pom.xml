@@ -23,6 +23,22 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.cowboysmall.playful</groupId>
+            <artifactId>playful-graphics</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cowboysmall.playful</groupId>
+            <artifactId>playful-physics</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cowboysmall.playful</groupId>
+            <artifactId>playful-util</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-math3</artifactId>
             <version>3.6.1</version>

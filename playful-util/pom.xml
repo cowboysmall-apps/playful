@@ -22,12 +22,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>com.cowboysmall.playful</groupId>
-            <artifactId>playful-core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
     </dependencies>
 
 </project>
